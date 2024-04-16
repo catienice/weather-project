@@ -8,3 +8,13 @@ form {
   text-align: center;
 }
 
+.column {
+  float: left;
+  width: 50%;
+}
+
+.current-weather:after {
+  content: "";
+  display: table;
+  clear: both;
+}
