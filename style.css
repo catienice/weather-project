@@ -11,6 +11,8 @@ form {
 .column {
   float: left;
   width: 50%;
+  margin: auto;
+  text-align: center;
 }
 
 .current-weather:after {

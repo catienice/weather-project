@@ -1,7 +1,6 @@
 const submitButton = document.querySelector('.submit');
 const searchInput = document.querySelector('.input');
 
-
 submitButton.addEventListener('click', function(){
   let city = document.querySelector('.input').value;
 
@@ -9,34 +8,45 @@ submitButton.addEventListener('click', function(){
 
   document.querySelector('.input').value = ' ';
   document.querySelector('.current-weather').innerHTML = ' ';
-
-  // fetches coordinates and adds to coordinates array
+  
+  // FETCH COORDINATES
   fetch(url, {
     method: 'GET',
     dataType: 'json'
   })
     .then(res => res.json())
     .then(data => {
-    fetchDaily(data);
+    fetchWeather(data);
     })
-  
 })
 
-// fetch daily weather from API
-const fetchDaily = function(data) {
+const fetchWeather = function(data) {
   let lat = data[0].lat
   let lon = data[0].lon
   const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=91c003f75e0552ff819bcfb19c839958`;
 
+  const url2 = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=91c003f75e0552ff819bcfb19c839958`
+
+  // FETCH DAILY
   fetch(url, {
     method: 'GET',
     dataType: 'json'
   })
-  .then(data => data.json())
+  .then(res => res.json())
   .then(data => {
-    console.log('fetch success', data);
+    console.log('DAILY fetch success', data);
     kelvinConvert(data);
     renderDailyWeather(data)
+  });
+
+  // FETCH FORECAST
+  fetch(url2, {
+    method: 'GET',
+    dataType: 'json'
+  })
+  .then(res => res.json())
+  .then(data => {
+    console.log('FORECAST fetch success',data)
   })
 
 };
@@ -67,7 +77,3 @@ const renderDailyWeather = function (data){
   document.querySelector('.current-weather').insertAdjacentHTML('beforeend', template);
 }
 
-// fetch forecast from API
-const fetchForecast = function(input) {
-  
-};
