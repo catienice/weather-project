@@ -20,3 +20,7 @@ form {
   display: table;
   clear: both;
 }
+
+.col {
+  border: solid;
+}
