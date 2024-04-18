@@ -61,23 +61,23 @@ const getAndRenFive = function (data) {
   const getToday = function () {
     return daysOfWeek[getNum]
   };
-  let dayOne = data.list[7].weather[0].main
-  let dayOneIcon = data.list[7].weather[0].icon
-  let dayTwo = data.list[15].weather[0].main
-  let dayTwoIcon = data.list[15].weather[0].icon
-  let dayThree = data.list[23].weather[0].main
-  let dayThreeIcon = data.list[23].weather[0].icon
-  let dayFour = data.list[31].weather[0].main
-  let dayFourIcon = data.list[31].weather[0].icon
-  let dayFive = data.list[39].weather[0].main
-  let dayFiveIcon = data.list[39].weather[0].icon
+  let dayOne = data.list[7].weather[0].main;
+  let dayOneIcon = data.list[7].weather[0].icon;
+  let dayOneTemp = data.list[7].main.temp;
+  let dayTwo = data.list[15].weather[0].main;
+  let dayTwoIcon = data.list[15].weather[0].icon;
+  let dayThree = data.list[23].weather[0].main;
+  let dayThreeIcon = data.list[23].weather[0].icon;
+  let dayFour = data.list[31].weather[0].main;
+  let dayFourIcon = data.list[31].weather[0].icon;
+  let dayFive = data.list[39].weather[0].main;
+  let dayFiveIcon = data.list[39].weather[0].icon;
   let weekdayOne = getToday();
   let weekdayTwo = daysOfWeek[(getNum + 1)];
   let weekdayThree = daysOfWeek[(getNum + 2)];
   let weekdayFour = daysOfWeek[(getNum + 3)];
   let weekdayFive = daysOfWeek[(getNum + 4)];
   let template = `
-
   <div class="container px-5 py-5"> 
     <div class="row"> 
       <div class="col mx-1">

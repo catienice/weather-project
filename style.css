@@ -23,4 +23,6 @@ form {
 
 .col {
   border: solid;
+  margin-top: 5%;
+  text-align: center;
 }
