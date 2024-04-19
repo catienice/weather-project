@@ -6,6 +6,7 @@ submitButton.addEventListener('click', function(){
   const url = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=3&appid=91c003f75e0552ff819bcfb19c839958`
   document.querySelector('.input').value = ' ';
   document.querySelector('.current-weather').innerHTML = ' ';
+  document.querySelector('.forecast').innerHTML = ' ';
   // FETCH COORDINATES
   fetch(url, {
     method: 'GET',
@@ -66,12 +67,16 @@ const getAndRenFive = function (data) {
   let dayOneTemp = data.list[7].main.temp;
   let dayTwo = data.list[15].weather[0].main;
   let dayTwoIcon = data.list[15].weather[0].icon;
+  let dayTwoTemp = data.list[15].main.temp;
   let dayThree = data.list[23].weather[0].main;
   let dayThreeIcon = data.list[23].weather[0].icon;
+  let dayThreeTemp = data.list[23].main.temp;
   let dayFour = data.list[31].weather[0].main;
   let dayFourIcon = data.list[31].weather[0].icon;
+  let dayFOurTemp = data.list[31].main.temp;
   let dayFive = data.list[39].weather[0].main;
   let dayFiveIcon = data.list[39].weather[0].icon;
+  let dayFiveTemp = data.list[39].main.temp;
   let weekdayOne = getToday();
   let weekdayTwo = daysOfWeek[(getNum + 1)];
   let weekdayThree = daysOfWeek[(getNum + 2)];
@@ -131,7 +136,3 @@ const renderDailyWeather = function (data){
   document.querySelector('.current-weather').insertAdjacentHTML('beforeend', template);
 }
 
-// render forecast
-const renderForecast = function () {
-
-};
