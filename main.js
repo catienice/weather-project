@@ -31,7 +31,7 @@ const fetchWeather = function(data) {
   .then(res => res.json())
   .then(data => {
     console.log('DAILY fetch success', data);
-    kelvinConvert(data);
+    console.log(kelvinConvert(data.main.temp));
     renderDailyWeather(data)
   });
   // FETCH FORECAST
@@ -48,8 +48,7 @@ const fetchWeather = function(data) {
 
 // convert current weather
 const kelvinConvert = function (data) {
-  let kelvinTemp = data.main.temp
-  return Math.floor((kelvinTemp - 273.15) * 9/5 + 32)
+  return Math.floor((data - 273.15) * 9/5 + 32)
 }
 
 // select instances of weather for each day
@@ -64,24 +63,25 @@ const getAndRenFive = function (data) {
   };
   let dayOne = data.list[7].weather[0].main;
   let dayOneIcon = data.list[7].weather[0].icon;
-  let dayOneTemp = data.list[7].main.temp;
+  let dayOneTemp = kelvinConvert(data.list[7].main.temp);
+  console.log(data.list[7].main.temp);
   let dayTwo = data.list[15].weather[0].main;
   let dayTwoIcon = data.list[15].weather[0].icon;
-  let dayTwoTemp = data.list[15].main.temp;
+  let dayTwoTemp = kelvinConvert(data.list[15].main.temp);
   let dayThree = data.list[23].weather[0].main;
   let dayThreeIcon = data.list[23].weather[0].icon;
-  let dayThreeTemp = data.list[23].main.temp;
+  let dayThreeTemp = kelvinConvert(data.list[23].main.temp);
   let dayFour = data.list[31].weather[0].main;
   let dayFourIcon = data.list[31].weather[0].icon;
-  let dayFOurTemp = data.list[31].main.temp;
+  let dayFourTemp = kelvinConvert(data.list[31].main.temp);
   let dayFive = data.list[39].weather[0].main;
   let dayFiveIcon = data.list[39].weather[0].icon;
-  let dayFiveTemp = data.list[39].main.temp;
+  let dayFiveTemp = kelvinConvert(data.list[39].main.temp);
   let weekdayOne = getToday();
   let weekdayTwo = daysOfWeek[(getNum + 1)];
   let weekdayThree = daysOfWeek[(getNum + 2)];
   let weekdayFour = daysOfWeek[(getNum + 3)];
-  let weekdayFive = daysOfWeek[(getNum + 4)];
+  let weekdayFive = daysOfWeek[(getNum + 4)]
   let template = `
   <div class="container px-5 py-5"> 
     <div class="row"> 
@@ -89,36 +89,41 @@ const getAndRenFive = function (data) {
         ${dayOne}<br>
         <img src="https://openweathermap.org/img/wn/${dayOneIcon}@2x.png"></img><br>
         ${weekdayOne}<br>
+        ${dayOneTemp}°
       </div> 
       <div class="col mx-1">
         ${dayTwo}<br>
         <img src="https://openweathermap.org/img/wn/${dayTwoIcon}@2x.png"></img><br>
         ${weekdayTwo}<br>
+        ${dayTwoTemp}°
       </div> 
       <div class="col mx-1">
         ${dayThree}<br>
         <img src="https://openweathermap.org/img/wn/${dayThreeIcon}@2x.png"></img><br>
         ${weekdayThree}<br>
+        ${dayThreeTemp}°
       </div> 
       <div class="col mx-1">
         ${dayFour}<br>
         <img src="https://openweathermap.org/img/wn/${dayFourIcon}@2x.png"></img><br>
         ${weekdayFour}<br>
+        ${dayFourTemp}°
       </div> 
       <div class="col mx-1">
         ${dayFive}<br>
         <img src="https://openweathermap.org/img/wn/${dayFiveIcon}@2x.png"></img><br>
         ${weekdayFive}<br>
+        ${dayFiveTemp}°
       </div> 
     </div>
   </div> 
   `;
   document.querySelector('.forecast').insertAdjacentHTML('beforeend', template);
-}
+};
 
 // render daily weather
-const renderDailyWeather = function (data){
-  let currTemp = kelvinConvert(data);
+const renderDailyWeather = function (data) {
+  let currTemp = kelvinConvert(data.main.temp);
   let city = data.name;
   let weather = data.weather[0].main;
   let weatherIcon = data.weather[0].icon;
@@ -134,5 +139,4 @@ const renderDailyWeather = function (data){
     </div>
   `
   document.querySelector('.current-weather').insertAdjacentHTML('beforeend', template);
-}
-
+};
