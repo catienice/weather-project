@@ -30,8 +30,6 @@ const fetchWeather = function(data) {
   })
   .then(res => res.json())
   .then(data => {
-    console.log('DAILY fetch success', data);
-    console.log(kelvinConvert(data.main.temp));
     renderDailyWeather(data)
   });
   // FETCH FORECAST
@@ -41,7 +39,6 @@ const fetchWeather = function(data) {
   })
   .then(res => res.json())
   .then(data => {
-    console.log('FORECAST fetch success', data);
     getAndRenFive(data)
   })
 };
@@ -64,7 +61,6 @@ const getAndRenFive = function (data) {
   let dayOne = data.list[7].weather[0].main;
   let dayOneIcon = data.list[7].weather[0].icon;
   let dayOneTemp = kelvinConvert(data.list[7].main.temp);
-  console.log(data.list[7].main.temp);
   let dayTwo = data.list[15].weather[0].main;
   let dayTwoIcon = data.list[15].weather[0].icon;
   let dayTwoTemp = kelvinConvert(data.list[15].main.temp);
